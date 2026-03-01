@@ -2,7 +2,7 @@
 A classic old puzzle board game. Where one tries to connect tiles to eventually make the "2048" and win!
 Even after winning you can still play until you lose.
 
-# 💻 Technologies
+## 💻 Technologies
   - Javascript
   - HTML
   - CSS
