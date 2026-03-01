@@ -1,58 +1,22 @@
-# new2048-game
+# 🎮 2048 Game
+A classic old puzzle board game. Where one tries to connect tiles to eventually make the "2048" and win!
+Even after winning you can still play until you lose.
 
-This template should help get you started developing with Vue 3 in Vite.
+# 💻 Technologies
+  - Javascript
+  - HTML
+  - CSS
+  - Vue
+  - TypeScript
 
-## Recommended IDE Setup
+# 🧠 What I Learned
+  - Create a PWA that provides offline operation using a caching strategy and on device storage of application and domain state.
+  - Create a PWA that integrate with the device operating system using the web app manifest and web api's.
+  - Create a PWA that handles differences in browser capabilities, screen size, input device.
+  - Create a SPA using components, reactivity, routing and managing application state by employing a frontend framework.
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
-
-## Type Support for `.vue` Imports in TS
-
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vite.dev/config/).
-
-## Project Setup
-
-```sh
-npm install
-```
-
-### Compile and Hot-Reload for Development
-
-```sh
-npm run dev
-```
-
-### Type-Check, Compile and Minify for Production
-
-```sh
-npm run build
-```
-
-### Run End-to-End Tests with [Playwright](https://playwright.dev)
-
-```sh
-# Install browsers for the first run
-npx playwright install
-
-# When testing on CI, must build the project first
-npm run build
-
-# Runs the end-to-end tests
-npm run test:e2e
-# Runs the tests only on Chromium
-npm run test:e2e -- --project=chromium
-# Runs the tests of a specific file
-npm run test:e2e -- tests/example.spec.ts
-# Runs the tests in debug mode
-npm run test:e2e -- --debug
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
-```
+# 🤔💭 What could be Improved
+  - Should add a key listener for 'Enter'. Pressing 'Enter' would not confirm.
+  - Styling can be improved, so far it looks pretty basic and simple.
+  - Adding the dynamic routes in the vercel link, since vercel serves static files.
+  - Code quality.. always.
