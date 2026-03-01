@@ -10,8 +10,8 @@ import Button from '@/components/Button.vue'
 const gameStore = useGameStore()
 const props = defineProps(['player'])
 const route = useRoute()
-const game = ref()
-const board = ref(null)
+const game = ref<any>(null)
+const board = ref<HTMLElement | null>(null)
 
 const playingOnPhone = ref(false)
 const orientationEnabled = ref(false)
@@ -26,7 +26,6 @@ watch(
 )
 
 const tiles = computed(() => {return game.value.tiles.flat()})
-console.log(boardToString(tiles.value))
 const won = computed(() => {return game.value.won})
 const play = computed(() => {return game.value.play})
 const score = computed(() => {return game.value.score})
@@ -62,7 +61,7 @@ function keyPressed(event: any) {
 function toggleOrientation() {
     orientationEnabled.value = true
 
-    DeviceOrientationEvent.requestPermission()
+    ;(DeviceOrientationEvent as any).requestPermission() // had to change this because TypeScript does not know that requestPermission() exists.
     .then((response: string) => {
         if (response === 'granted') {
             // the event listener will run every time the phone moves or rotates.
@@ -78,7 +77,7 @@ function disableOrientation() {
     window.removeEventListener('deviceorientation', keyPressed)
 }
 
-function boardToString(gameTiles: string) {
+function boardToString(gameTiles: number[]) {
     let boardString = ''
 
     const topBorder = " --- " + "--- ".repeat(3)
@@ -91,7 +90,7 @@ function boardToString(gameTiles: string) {
     for (let y = 0; y<boardHeight; y++) {
         boardString += topBorder + "\n"; boardString += "|"
         for (let x=0; x<boardWidth; x++) {
-            boardString += ` ${tiles.value[x + currentRow]} |`;
+            boardString += ` ${gameTiles[x + currentRow]} |`;
             if (x === boardWidth - 1) {
                 boardString += '\n'
                 currentRow += boardWidth;
@@ -109,6 +108,11 @@ async function shareGame() {
     }
 
     try {
+        if (!navigator.share) {
+            alert("Sharing is not supported on this device.");
+            return;
+        }
+
         await navigator.share(shareData);
     } catch(err) {
         console.log("There has been a error", err)
@@ -118,16 +122,24 @@ async function shareGame() {
 onMounted(() => {
     enableKeyInputs()
     playingOnPhone.value = useDeviceInfo()
-    board.value.addEventListener("touchstart", keyPressed)
-    board.value.addEventListener("touchend", keyPressed)
+
+    if (board.value) {
+        board.value.addEventListener("touchstart", keyPressed)
+        board.value.addEventListener("touchend", keyPressed)
+    }
+
     window.addEventListener('keyup', keyPressed)
 })
 
 onUnmounted(() => {
     playingOnPhone.value = false
+    
+    if (board.value) {
+        window.removeEventListener('touchstart', keyPressed)
+        window.removeEventListener('touchend', keyPressed)
+    }
+    
     window.removeEventListener('keyup', keyPressed)
-    window.removeEventListener('touchstart', keyPressed)
-    window.removeEventListener('touchend', keyPressed)
     gameStore.saveGame(props.player, game.value)
 })
 
