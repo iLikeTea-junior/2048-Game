@@ -2,7 +2,7 @@
 A classic old puzzle board game. Where one tries to connect tiles to eventually make the "2048" and win!
 Even after winning you can still play until you lose.
 
-I present to you the demo link: 2048puzzlegame-25z0kn5d6-iliketea-juniors-projects.vercel.app
+I present to you the demo link: 2048puzzlegame.vercel.app
 
 ## 💻 Technologies
   - Javascript
